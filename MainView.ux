@@ -1,0 +1,32 @@
+<App Background="#fff">
+  <UserEvent Name="callClip"/>
+	<OnUserEvent EventName="callClip" Handler="{copyclip}" />
+  <JavaScript>
+
+    var Observable = require("FuseJS/Observable");
+    var clip = require("ClipboardManager");
+    var label = new Observable("Copy to clipboard!");
+    var cliptext = new Observable("Copy this text to clipboard");
+
+    var copyclip = function() {
+        clip.setText(cliptext.value);
+        label.value = "Copied to cliboard!";
+    }
+
+    module.exports = {
+      copyclip: copyclip,
+      label: label,
+      cliptext: cliptext
+    }
+
+  </JavaScript>
+  <StackPanel>
+    <TextBox Margin="30" FontSize="50" TextWrapping="Wrap" Value="{cliptext}" />
+    <Rectangle Background="#000" Margin="20" Padding="30">
+      <Text Alignment="Center" FontSize="54" TextWrapping="Wrap" TextAlignment="Center" Value="{label}" Color="#fff" />
+      <Clicked>
+        <RaiseUserEvent EventName="callClip" />
+      </Clicked>
+    </Rectangle>
+  </StackPanel>
+</App>
