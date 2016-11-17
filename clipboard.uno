@@ -30,7 +30,8 @@ public class Clipboard
     [Foreign(Language.ObjC)]
     public static extern(IOS) void SetString(string text)
     @{
-
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        [pasteboard setString:text];
     @}
 
     public static extern(!(IOS||ANDROID)) void SetString(string text)
