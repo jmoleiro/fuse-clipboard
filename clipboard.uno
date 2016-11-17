@@ -12,10 +12,10 @@ using Uno.UX;
 [ForeignInclude(Language.Java, "android.content.ClipData")]
 [ForeignInclude(Language.Java, "android.os.Looper")]
 [ForeignInclude(Language.Java, "com.fuse.Activity")]
-public extern(ANDROID) class Clipboard
+public class Clipboard
 {
     [Foreign(Language.Java)]
-    static public void SetString(string text)
+    public static extern(ANDROID) void SetString(string text)
     @{
         if (Looper.myLooper() == null)
         {
@@ -26,22 +26,14 @@ public extern(ANDROID) class Clipboard
         ClipData clip = ClipData.newPlainText("app_clipbard", text);
         clipboard.setPrimaryClip(clip);
     @}
-}
 
-public extern(IOS) class Clipboard
-{
     [Foreign(Language.ObjC)]
-    static public void SetString(string text)
+    public static extern(IOS) void SetString(string text)
     @{
 
     @}
-}
 
-
-
-public extern(!(IOS||ANDROID)) class Clipboard
-{
-    static public void SetString(string text)
+    public static extern(!(IOS||ANDROID)) void SetString(string text)
     {
 
     }
