@@ -53,10 +53,10 @@ public class ClipboardManager : NativeModule
         debug_log "ClipNew!";
         _instance = this;
         Resource.SetGlobalKey(this, "ClipboardManager");
-        AddMember(new NativeFunction("setText", (NativeCallback)_setText));
+        AddMember(new NativeFunction("setText", (NativeCallback)SetText));
     }
 
-    public object _setText(Context c, object[] args)
+    public object SetText(Context c, object[] args)
     {
         debug_log "Set Text: " + args[0].ToString();
         Clipboard.SetString(args[0].ToString());
